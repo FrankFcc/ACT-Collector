@@ -7,6 +7,9 @@ package cc.isotopestudio.GUI;
 
 import cc.isotopestudio.Main;
 import cc.isotopestudio.calculator.calculator;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +21,11 @@ public class MainScreen extends javax.swing.JFrame {
      * Creates new form MainScreen
      */
     public MainScreen() {
+        super("MainScreen");
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize(); // resolution of the monitor
+        setLocation(size.width / 2 - this.getWidth() / 2, size.height / 2 - this.getHeight() / 2);
         jTextField1.setEditable(false);
         jTextField1.setText(Main.username);
     }
@@ -152,15 +159,20 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewData().setVisible(true);
+                try {
+                    new ViewData().setVisible(true);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    new JOptionPane().showMessageDialog(null, "您还未添加数据。");
+                };
+
             }
         });        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
+
 
     }//GEN-LAST:event_jTextField1ActionPerformed
 
@@ -176,13 +188,12 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    System.exit(0);        // TODO add your handling code here:
+        System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

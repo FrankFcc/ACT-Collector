@@ -7,6 +7,8 @@ package cc.isotopestudio.GUI;
 
 import cc.isotopestudio.Main;
 import cc.isotopestudio.data.Data;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,45 +20,17 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JFrame;
 
-class DatabaseConn {
-
-    private Connection conn;
-    private Statement stmt;
-    private String url = "jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=dbname";
-    private String classforname = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
-    private String uid = "sa";
-    private String pwd = "password";
-
-    /**
-     * <p>
-     * 通过Microsoft JDBC驱动获得数据库连接</p>
-     *
-     * @return Connection
-     * @exception ClassNotFoundException, SQLException
-     */
-    public Connection getConnection() {
-        try {
-            Class.forName(classforname);
-            if (conn == null || conn.isClosed()) {
-                conn = DriverManager.getConnection(url, uid, pwd);
-            }
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return conn;
-    }
-
-}
-
 public class AddData extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
     public AddData() {
+        super("Add Your Score");
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize(); // resolution of the monitor
+        setLocation(size.width / 2 - this.getWidth() / 2, size.height / 2 - this.getHeight() / 2);
     }
 
     /**

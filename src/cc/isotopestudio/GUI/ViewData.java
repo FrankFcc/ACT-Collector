@@ -9,6 +9,8 @@ import cc.isotopestudio.Main;
 import cc.isotopestudio.data.Data;
 import cc.isotopestudio.data.Score;
 import cc.isotopestudio.info.Sort;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
@@ -25,7 +27,11 @@ public class ViewData extends javax.swing.JFrame {
      * Creates new form ViewData
      */
     public ViewData() {
+        super("View Your Score");
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize(); // resolution of the monitor
+        setLocation(size.width / 2 - this.getWidth() / 2, size.height / 2 - this.getHeight() / 2);
         JTable table = new RecordTable();
         jScrollPane1.setViewportView(table);
     }
@@ -113,7 +119,7 @@ public class ViewData extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -123,11 +129,10 @@ public class ViewData extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
     public class RecordTable extends JTable {
 
         private DefaultTableModel defaultTableModel;
-        private final Object[] columnNames = { "year", "month", "day", "mark", "math", "english", "reading", "science", "essay", "composite"};
+        private final Object[] columnNames = {"year", "month", "day", "mark", "math", "english", "reading", "science", "essay", "composite"};
 
         public RecordTable() {
             defaultTableModel = new DefaultTableModel(columnNames, 0) {
@@ -155,7 +160,7 @@ public class ViewData extends javax.swing.JFrame {
             String[] row = new String[10];
             int i = 0;
             for (Score score : scoreList) {
-                
+
                 row[0] = score.getYear() + "";
                 row[1] = score.getMonth() + "";
                 row[2] = score.getDay() + "";

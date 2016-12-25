@@ -5,6 +5,9 @@
  */
 package cc.isotopestudio.calculator;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 public class calculator extends javax.swing.JFrame {
 
     /**
@@ -13,6 +16,9 @@ public class calculator extends javax.swing.JFrame {
     public calculator() {
 
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize(); // resolution of the monitor
+        setLocation(size.width / 2 - this.getWidth() / 2, size.height / 2 - this.getHeight() / 2);
         jButton1.setMnemonic(java.awt.event.KeyEvent.VK_1);
         jButton2.setMnemonic(java.awt.event.KeyEvent.VK_2);
         jButton3.setMnemonic(java.awt.event.KeyEvent.VK_3);
@@ -26,16 +32,17 @@ public class calculator extends javax.swing.JFrame {
         History.run();
 
     }
-    private boolean ifEmpty(){
-         if (jTextField1.getText().equals("")) {
+
+    private boolean ifEmpty() {
+        if (jTextField1.getText().equals("")) {
             jTextField3.setText("Please complete the equation");
             History.addInfo("Wrong Equation.");
             return true;
-         }
-         else{
+        } else {
             return false;
-         }
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,7 +247,7 @@ public class calculator extends javax.swing.JFrame {
             jTextField1.setText(String.valueOf(r1));
             jTextField2.setText("");    // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
-    }    
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         float n1, n2, r1;
         if (jTextField1.getText().equals("")) {
@@ -262,9 +269,10 @@ public class calculator extends javax.swing.JFrame {
             }
             jTextField3.setText(String.valueOf(r1));
             jTextField1.setText(String.valueOf(r1));
-            jTextField2.setText("");}
+            jTextField2.setText("");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
-        
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         float n1, n2, r1;
         if (jTextField1.getText().equals("")) {
@@ -286,36 +294,37 @@ public class calculator extends javax.swing.JFrame {
             }
             jTextField3.setText(String.valueOf(r1));
             jTextField1.setText(String.valueOf(r1));
-            jTextField2.setText("");}
+            jTextField2.setText("");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         //while (true) {
-            float n1, n2, r1;
-            if (!ifEmpty()) {
-                if (jTextField2.getText().equals("")) {
-                    n1 = Float.parseFloat(jTextField1.getText());
-                    r1 = n1 + tempt;
-                    jTextField2.grabFocus();
-                    History.addInfo(n1 + " + " + tempt + " = " + r1);
-                } else {
-                    n1 = Float.parseFloat(jTextField1.getText());
-                    n2 = Float.parseFloat(jTextField2.getText());
-                    r1 = n1 + n2;
-                    tempt = n2;
-                    jTextField2.grabFocus();
-                    History.addInfo(n1 + " + " + n2 + " = " + r1);
-                }
-
-                jTextField3.setText(String.valueOf(r1));
-                jTextField1.setText(String.valueOf(r1));
-                jTextField2.setText("");
+        float n1, n2, r1;
+        if (!ifEmpty()) {
+            if (jTextField2.getText().equals("")) {
+                n1 = Float.parseFloat(jTextField1.getText());
+                r1 = n1 + tempt;
+                jTextField2.grabFocus();
+                History.addInfo(n1 + " + " + tempt + " = " + r1);
+            } else {
+                n1 = Float.parseFloat(jTextField1.getText());
+                n2 = Float.parseFloat(jTextField2.getText());
+                r1 = n1 + n2;
+                tempt = n2;
+                jTextField2.grabFocus();
+                History.addInfo(n1 + " + " + n2 + " = " + r1);
             }
-    
+
+            jTextField3.setText(String.valueOf(r1));
+            jTextField1.setText(String.valueOf(r1));
+            jTextField2.setText("");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
     float tempt = 0;
-   
+
     /**
      * @param args the command line arguments
      */

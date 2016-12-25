@@ -7,6 +7,8 @@ package cc.isotopestudio.GUI;
 
 import cc.isotopestudio.Main;
 import cc.isotopestudio.data.Data;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -23,7 +25,11 @@ public class LOGIN extends javax.swing.JFrame {
      * Creates new form LOGIN1
      */
     public LOGIN() {
+        super("LOGIN");
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize(); // resolution of the monitor
+        setLocation(size.width / 2 - this.getWidth() / 2, size.height / 2 - this.getHeight() / 2);
         jTextField4.setText(suijishu);
         jTextField4.setEditable(false);
         jButton1.setMnemonic(java.awt.event.KeyEvent.VK_ENTER);

@@ -24,6 +24,7 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 login = new LOGIN();
+                
                 login.setVisible(true);
             }
         });
