@@ -3,9 +3,9 @@
  *
  * Created on __DATE__, __TIME__
  */
-package 界面;
+package cc.isotopestudio.GUI;
 
-import act.collector.SQLmanager;
+import cc.isotopestudio.data.Data;
 import javax.swing.JOptionPane;
 
 /**
@@ -115,10 +115,10 @@ public class Registered extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "两次密码输入不一致！");
             return;
         }
-        if (SQLmanager.ifRepeated(name)) {
+        if (Data.ifRepeated(name)) {
             JOptionPane.showMessageDialog(null, "用户名已存在！");
         } else {
-            SQLmanager.addUser(name, pwd, "");
+            Data.addUser(name, pwd, "");
             JOptionPane.showMessageDialog(null, "注册成功！");
             this.setVisible(false);
         }

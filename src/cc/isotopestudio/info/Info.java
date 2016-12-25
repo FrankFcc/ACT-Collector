@@ -4,7 +4,7 @@
  * Created on __DATE__, __TIME__
  */
 
-package info;
+package cc.isotopestudio.info;
 
 import Student.Student;
 

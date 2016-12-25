@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package 界面;
+package cc.isotopestudio.GUI;
 
-import java.sql.PreparedStatement;
+import cc.isotopestudio.Main;
+import cc.isotopestudio.data.Data;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,39 +14,39 @@ import javax.swing.JOptionPane;
  * @author Administrator
  */
 import java.sql.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JFrame;
+
 class DatabaseConn {
 
- private Connection conn;
- private Statement stmt;
- private String url = "jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=dbname";
- private String classforname = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
- private String uid = "sa";
- private String pwd = "password";
- 
- 
- /**
-  * <p>通过Microsoft JDBC驱动获得数据库连接</p>
-  * @return Connection
-  * @exception ClassNotFoundException, SQLException
-  */
- public Connection getConnection()
- {
-  try
-  {
-   Class.forName(classforname);
-   if (conn == null || conn.isClosed())
-    conn = DriverManager.getConnection( url, uid, pwd);
-  }
-  catch (ClassNotFoundException ex)
-  {
-   ex.printStackTrace();
-  }
-  catch (SQLException ex)
-  {
-   ex.printStackTrace();
-  }
-  return conn;  
- }
+    private Connection conn;
+    private Statement stmt;
+    private String url = "jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=dbname";
+    private String classforname = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
+    private String uid = "sa";
+    private String pwd = "password";
+
+    /**
+     * <p>
+     * 通过Microsoft JDBC驱动获得数据库连接</p>
+     *
+     * @return Connection
+     * @exception ClassNotFoundException, SQLException
+     */
+    public Connection getConnection() {
+        try {
+            Class.forName(classforname);
+            if (conn == null || conn.isClosed()) {
+                conn = DriverManager.getConnection(url, uid, pwd);
+            }
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return conn;
+    }
 
 }
 
@@ -231,7 +232,7 @@ public class AddData extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if (date.getText().equals("")|date.getText().equals("1")) {
+        if (date.getText().equals("") | date.getText().equals("1")) {
             new JOptionPane().showMessageDialog(null, "日期不能为空");
         } else if (mark.getText().equals("")) {
             new JOptionPane().showMessageDialog(null, "编号不能为空");
@@ -239,17 +240,17 @@ public class AddData extends javax.swing.JFrame {
             new JOptionPane().showMessageDialog(null, "数学成绩不能为空");
         } else if (english.getText().equals("")) {
             new JOptionPane().showMessageDialog(null, "英语成绩不能为空");
-        }else if (reading.getText().equals("")) {
+        } else if (reading.getText().equals("")) {
             new JOptionPane().showMessageDialog(null, "阅读成绩不能为空");
         } else if (science.getText().equals("")) {
             new JOptionPane().showMessageDialog(null, "科学成绩不能为空");
         } else {
-            String sql = "insert into stud values('" + date.getText() + "','" + mark.getText() + "','" + math.getText() + "','" + english.getText() + "','" + reading.getText() + "','" + science.getText() +  "')";
-            //if(.executeSQL(sql)){
-            int total= Integer.parseInt(math.getText())+Integer.parseInt(english.getText())+Integer.parseInt(reading.getText())+Integer.parseInt(science.getText());
-            new JOptionPane().showMessageDialog(null,"添加成功！\n"
-                    +"日期  "+date.getText()+"\n编号  "+mark.getText()+"\n数学成绩  "+math.getText()+"\n英语成绩  "+english.getText()+"\n阅读成绩  "+reading.getText()+"\n科学成绩  "+science.getText()
-                    +"\n总分  "+total);
+            int total = (int) ((Integer.parseInt(math.getText()) + Integer.parseInt(english.getText()) + Integer.parseInt(reading.getText()) + Integer.parseInt(science.getText()) + 0.5) / 4);
+            GregorianCalendar g = new GregorianCalendar();
+            Data.addScore(Main.username, g.get(Calendar.YEAR), g.get(Calendar.MONTH) + 1, g.get(Calendar.DATE), mark.getText(), math.getText(), english.getText(), reading.getText(), science.getText(), "-1", total);
+            new JOptionPane().showMessageDialog(null, "添加成功！\n"
+                    + "日期  " + date.getText() + "\n编号  " + mark.getText() + "\n数学成绩  " + math.getText() + "\n英语成绩  " + english.getText() + "\n阅读成绩  " + reading.getText() + "\n科学成绩  " + science.getText()
+                    + "\n总分  " + total);
             //PreparedStatement sql = conn.prepareStatement(sql);
 
             date.setText("");
@@ -276,6 +277,8 @@ public class AddData extends javax.swing.JFrame {
         science.setText("");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public static JFrame addDataFrame;
 
     /**
      * @param args the command line arguments
@@ -308,7 +311,8 @@ public class AddData extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddData().setVisible(true);
+                addDataFrame = new AddData();
+                addDataFrame.setVisible(true);
             }
         });
     }
@@ -337,4 +341,3 @@ public class AddData extends javax.swing.JFrame {
     private javax.swing.JTextField science;
     // End of variables declaration//GEN-END:variables
 }
-
