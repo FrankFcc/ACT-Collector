@@ -5,6 +5,16 @@
  */
 package cc.isotopestudio.GUI;
 
+import cc.isotopestudio.Main;
+import cc.isotopestudio.data.Data;
+import cc.isotopestudio.data.Score;
+import cc.isotopestudio.info.Sort;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 44750
@@ -16,6 +26,8 @@ public class ViewData extends javax.swing.JFrame {
      */
     public ViewData() {
         initComponents();
+        JTable table = new RecordTable();
+        jScrollPane1.setViewportView(table);
     }
 
     /**
@@ -29,28 +41,14 @@ public class ViewData extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("View Your Score ");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setText("Hi,");
 
@@ -72,7 +70,6 @@ public class ViewData extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -86,6 +83,7 @@ public class ViewData extends javax.swing.JFrame {
                         .addGap(82, 82, 82)
                         .addComponent(jButton1)))
                 .addContainerGap(126, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,8 +94,8 @@ public class ViewData extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,56 +112,81 @@ public class ViewData extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    
+    public class RecordTable extends JTable {
+
+        private DefaultTableModel defaultTableModel;
+        private final Object[] columnNames = { "year", "month", "day", "mark", "math", "english", "reading", "science", "essay", "composite"};
+
+        public RecordTable() {
+            defaultTableModel = new DefaultTableModel(columnNames, 0) {
+                public boolean isCellEditable(int row, int column) {
+                    return false;
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+                @Override
+                public void setValueAt(Object aValue, int row, int column) {
+                    super.setValueAt(aValue, row, column);
+                    fireTableCellUpdated(row, column);
+                }
+            };
+            this.setModel(defaultTableModel);
+            this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            this.setRowSelectionAllowed(true);
+            initRowsData();
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewData().setVisible(true);
+        void initRowsData() {
+//        this.removeRowsData();
+
+            List<Score> scoreList = Data.getScoreByUser(Main.username);
+            Sort.sortByComposite((ArrayList<Score>) scoreList);
+            String[] row = new String[10];
+            int i = 0;
+            for (Score score : scoreList) {
+                
+                row[0] = score.getYear() + "";
+                row[1] = score.getMonth() + "";
+                row[2] = score.getDay() + "";
+                row[3] = score.getMark() + "";
+                row[4] = score.getMath() + "";
+                row[5] = score.getEnglish() + "";
+                row[6] = score.getReading() + "";
+                row[7] = score.getScience() + "";
+                row[8] = score.getEssay() + "";
+                row[9] = score.getComposite() + "";
+                i++;
+                defaultTableModel.addRow(row.clone());
             }
-        });
-    }
+//        this.revalidate();
 
+            this.updateUI();
+        }
+
+        private void removeRowsData() {
+            int count = defaultTableModel.getRowCount();
+            for (count -= 1; count > -1; count--) {
+                defaultTableModel.removeRow(count);
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

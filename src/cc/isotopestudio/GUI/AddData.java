@@ -92,7 +92,7 @@ public class AddData extends javax.swing.JFrame {
 
         jLabel2.setText("考试日期");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("录入信息");
 
@@ -106,6 +106,7 @@ public class AddData extends javax.swing.JFrame {
 
         jLabel8.setText("科学分数");
 
+        date.setEnabled(false);
         date.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateActionPerformed(evt);
@@ -127,6 +128,7 @@ public class AddData extends javax.swing.JFrame {
         });
 
         jLabel12.setText("日期/YY.MM.DD");
+        jLabel12.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,9 +234,10 @@ public class AddData extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if (date.getText().equals("") | date.getText().equals("1")) {
+        /* if (date.getText().equals("") | date.getText().equals("1")) {
             new JOptionPane().showMessageDialog(null, "日期不能为空");
-        } else if (mark.getText().equals("")) {
+        }*/
+        if (mark.getText().equals("")) {
             new JOptionPane().showMessageDialog(null, "编号不能为空");
         } else if (math.getText().equals("")) {
             new JOptionPane().showMessageDialog(null, "数学成绩不能为空");
@@ -245,7 +248,7 @@ public class AddData extends javax.swing.JFrame {
         } else if (science.getText().equals("")) {
             new JOptionPane().showMessageDialog(null, "科学成绩不能为空");
         } else {
-            int total = (int) ((Integer.parseInt(math.getText()) + Integer.parseInt(english.getText()) + Integer.parseInt(reading.getText()) + Integer.parseInt(science.getText()) + 0.5) / 4);
+            int total = (int) ((Integer.parseInt(math.getText()) + Integer.parseInt(english.getText()) + Integer.parseInt(reading.getText()) + Integer.parseInt(science.getText())) / 4.0 + .5);
             GregorianCalendar g = new GregorianCalendar();
             Data.addScore(Main.username, g.get(Calendar.YEAR), g.get(Calendar.MONTH) + 1, g.get(Calendar.DATE), mark.getText(), math.getText(), english.getText(), reading.getText(), science.getText(), "-1", total);
             new JOptionPane().showMessageDialog(null, "添加成功！\n"
@@ -283,39 +286,6 @@ public class AddData extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                addDataFrame = new AddData();
-                addDataFrame.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField date;

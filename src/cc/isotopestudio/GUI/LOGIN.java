@@ -27,6 +27,7 @@ public class LOGIN extends javax.swing.JFrame {
         jTextField4.setText(suijishu);
         jTextField4.setEditable(false);
         jButton1.setMnemonic(java.awt.event.KeyEvent.VK_ENTER);
+        jTextField1.grabFocus();
     }
 
     /**
