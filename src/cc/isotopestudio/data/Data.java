@@ -65,6 +65,7 @@ public class Data {
             String[] users = data.split(" ;");
             for (String user : users) {
                 String[] info = user.split(" ");
+                if(info.length<1){continue;}
                 if (username.equals(info[0])) {
                     return pw.equals(info[1]);
                 }
@@ -82,6 +83,7 @@ public class Data {
             String[] users = data.split(" ;");
             for (String user : users) {
                 String[] info = user.split(" ");
+                 if(info.length<1){continue;}
                 if (username.equals(info[0])) {
                     return true;
                 }

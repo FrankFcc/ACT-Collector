@@ -7,6 +7,7 @@ package cc.isotopestudio.GUI;
 
 import cc.isotopestudio.data.Data;
 import java.awt.Dimension;
+import static java.awt.SystemColor.info;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
@@ -101,6 +102,7 @@ public class Registered extends javax.swing.JFrame {
         String name = jTextField1.getText();
         String pwd = jPasswordField1.getText();
         String pwd2 = jPasswordField2.getText();
+        
         if (name == null || name.equals("")) {
             JOptionPane.showMessageDialog(null, "请输入用户名！");
             return;

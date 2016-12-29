@@ -6,6 +6,7 @@
 package cc.isotopestudio.GUI;
 
 import cc.isotopestudio.Main;
+import static cc.isotopestudio.Main.login;
 import cc.isotopestudio.data.Data;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -26,9 +27,11 @@ public class AddData extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public AddData() {
+
         super("Add Your Score");
         initComponents();
         Toolkit toolkit = getToolkit();
+        jButton1.setMnemonic(java.awt.event.KeyEvent.VK_ENTER);
         Dimension size = toolkit.getScreenSize(); // resolution of the monitor
         setLocation(size.width / 2 - this.getWidth() / 2, size.height / 2 - this.getHeight() / 2);
     }
@@ -209,8 +212,8 @@ public class AddData extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         /* if (date.getText().equals("") | date.getText().equals("1")) {
-            new JOptionPane().showMessageDialog(null, "日期不能为空");
-        }*/
+         new JOptionPane().showMessageDialog(null, "日期不能为空");
+         }*/
         if (mark.getText().equals("")) {
             new JOptionPane().showMessageDialog(null, "编号不能为空");
         } else if (math.getText().equals("")) {
@@ -228,6 +231,7 @@ public class AddData extends javax.swing.JFrame {
             new JOptionPane().showMessageDialog(null, "添加成功！\n"
                     + "日期  " + date.getText() + "\n编号  " + mark.getText() + "\n数学成绩  " + math.getText() + "\n英语成绩  " + english.getText() + "\n阅读成绩  " + reading.getText() + "\n科学成绩  " + science.getText()
                     + "\n总分  " + total);
+            dispose();
             //PreparedStatement sql = conn.prepareStatement(sql);
 
             date.setText("");

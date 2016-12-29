@@ -8,7 +8,6 @@ package cc.isotopestudio.info;
 import cc.isotopestudio.data.Score;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
